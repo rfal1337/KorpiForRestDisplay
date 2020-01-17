@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class NetworkClientUI : MonoBehaviour {
 
-    NetworkClient client;
+    static NetworkClient client;
 
     void OnGUI()
     {
@@ -22,6 +22,7 @@ public class NetworkClientUI : MonoBehaviour {
             }
         }
     }
+
 	// Use this for initialization
 	void Start () {
         client = new NetworkClient();
@@ -29,9 +30,19 @@ public class NetworkClientUI : MonoBehaviour {
 
     void Connect()
     {
-        client.Connect("86.50.116.69", 250000);
+        client.Connect("192.168.42.58", 25000);
     }
 	
+    static public void SendJoystickInfo(float hDelta, float vDelta)
+    {
+        if (client.isConnected)
+        {
+            StringMessage msg = new StringMessage();
+            msg.value = hDelta + "|" + vDelta;
+            client.Send(888, msg);
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
 		
