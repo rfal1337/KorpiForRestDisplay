@@ -30,7 +30,7 @@ public class NetworkClientUI : MonoBehaviour {
 
     void Connect()
     {
-        client.Connect("192.168.42.58", 25000);
+        client.Connect("192.168.1.250", 4444);
     }
 	
     static public void SendJoystickInfo(float hDelta, float vDelta)

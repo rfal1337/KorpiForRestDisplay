@@ -49,6 +49,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 			{
 				m_VerticalVirtualAxis.Update(delta.y);
 			}
+            Debug.Log(delta.y);
             NetworkClientUI.SendJoystickInfo(-delta.x, delta.y);
 		}
 
@@ -69,6 +70,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 				m_VerticalVirtualAxis = new CrossPlatformInputManager.VirtualAxis(verticalAxisName);
 				CrossPlatformInputManager.RegisterVirtualAxis(m_VerticalVirtualAxis);
 			}
+            Debug.Log("Created virtual axes");
 		}
 
 
@@ -91,6 +93,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 			}
 			transform.position = new Vector3(m_StartPos.x + newPos.x, m_StartPos.y + newPos.y, m_StartPos.z + newPos.z);
 			UpdateVirtualAxes(transform.position);
+            Debug.Log(transform.position);
 		}
 
 

@@ -27,7 +27,7 @@ public class NetworkServerUI : MonoBehaviour {
         m_VVAxis = new CrossPlatformInputManager.VirtualAxis(verticalAxisName);
         CrossPlatformInputManager.RegisterVirtualAxis(m_VVAxis);
 
-        NetworkServer.Listen(25000);
+        NetworkServer.Listen(4444);
         NetworkServer.RegisterHandler(888, ServerReceiveMessage);
 	}
 
@@ -35,6 +35,7 @@ public class NetworkServerUI : MonoBehaviour {
     {
         StringMessage msg = new StringMessage();
         msg.value = message.ReadMessage<StringMessage>().value;
+        Debug.Log(msg.value);
 
         string[] deltas = msg.value.Split('|');
         m_HVAxis.Update(Convert.ToSingle(deltas[0]));
