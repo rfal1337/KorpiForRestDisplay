@@ -14,17 +14,19 @@ public class Networkingv2 : MonoBehaviour
     public bool isServer = false;
     public bool isClient = false;
 
+    public MyDataMsg msgHolder;
 
     class MyMsgType
     {
         public static short ID = 815;
     }
 
-    class MyDataMsg : MessageBase
+    public class MyDataMsg : MessageBase
     {
         public int userID;
         public string rosResults;
 
+        public MyDataMsg() { }
         public MyDataMsg(int userID, string rosResults)
         {
             this.userID = userID;
@@ -98,11 +100,11 @@ public class Networkingv2 : MonoBehaviour
     public void SendMyDataMessage()
     {
         var msg = new MyDataMsg();
-        msg.position = new Vector3(0.0f, 0.0f, 0.0f);
-        msg.angle = -21.74f;
-        msg.message = "lets hope this comes through";
+        msg.userID = 1337;
+        msg.rosResults = "068594";
 
         myClient.Send(MyMsgType.ID, msg);
+
     }
 
     // What the SERVCER should do when getting a message
@@ -111,8 +113,13 @@ public class Networkingv2 : MonoBehaviour
         MyDataMsg myMsg = netMsg.ReadMessage<MyDataMsg>();
 
         // use the values from the message here
-        Debug.Log("position: " + myMsg.position);
-        Debug.Log("angle: " + myMsg.angle);
-        Debug.Log("message: " + myMsg.message);
+        Debug.Log("userID: " + myMsg.userID);
+        Debug.Log("ROS Results: " + myMsg.rosResults);
+        msgHolder = myMsg;
+    }
+
+    public MyDataMsg GetData()
+    {
+        return msgHolder;
     }
 }
