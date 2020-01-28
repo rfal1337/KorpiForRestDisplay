@@ -6,8 +6,6 @@ using UnityEngine.Networking;
 public class Networkingv2 : MonoBehaviour
 {
 
-    public bool isAtStartup = true;
-
     NetworkClient myClient;
     public const short MyDataMsgID = 815;
 
@@ -16,11 +14,13 @@ public class Networkingv2 : MonoBehaviour
 
     public MyDataMsg msgHolder;
 
+    //Message ID
     class MyMsgType
     {
         public static short ID = 815;
     }
 
+    //Network message data and contents
     public class MyDataMsg : MessageBase
     {
         public int userID;
@@ -34,29 +34,25 @@ public class Networkingv2 : MonoBehaviour
         }
     }
 
-
-    void Update()
+    void Start()
     {
-        if (isAtStartup)
+        if (isServer)
         {
-            if (isServer)
-            {
-                // Now this is the SERVER
-                SetupServer();
-            }
+            // Now this is the SERVER
+            SetupServer();
+        }
 
-            if (isClient)
-            {
-                // Now this is the CLIENT
-                SetupClient();
-            }
+        if (isClient)
+        {
+            // Now this is the CLIENT
+            SetupClient();
+        }
 
-            if (isServer && isClient)
-            {
-                // Now this is a SERVER and a Local CLIENT too
-                SetupServer();
-                SetupLocalClient();
-            }
+        if (isServer && isClient)
+        {
+            // Now this is a SERVER and a Local CLIENT too
+            SetupServer();
+            SetupLocalClient();
         }
     }
 
@@ -65,9 +61,6 @@ public class Networkingv2 : MonoBehaviour
     {
         NetworkServer.Listen(4444);
         NetworkServer.RegisterHandler(MyMsgType.ID, OnRecievingData);
-        isAtStartup = false;
-        isServer = true;
-        isClient = false;
     }
 
     // Create a client and connect to the server port
@@ -76,9 +69,6 @@ public class Networkingv2 : MonoBehaviour
         myClient = new NetworkClient();
         myClient.RegisterHandler(MsgType.Connect, OnConnected);
         myClient.Connect("192.168.1.250", 4444);
-        isAtStartup = false;
-        isClient = true;
-        isServer = false;
     }
 
     // Create a local client and connect to the local server
@@ -86,7 +76,6 @@ public class Networkingv2 : MonoBehaviour
     {
         myClient = ClientScene.ConnectLocalServer();
         myClient.RegisterHandler(MsgType.Connect, OnConnected);
-        isAtStartup = false;
     }
 
 
