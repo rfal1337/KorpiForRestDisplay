@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4856cc326805b66409fe836f895e6a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tex: {fileID: 0}
 --- !u!114 &549414156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +629,7 @@ GameObject:
   - component: {fileID: 1159916414}
   - component: {fileID: 1159916413}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: TextInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -799,6 +800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mCamera: {fileID: 0}
   userImage: {fileID: 0}
+  useCamera: 0
 --- !u!114 &1218902909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,7 +820,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: c72dd060ed2e9b64aa3e8169bc48d474, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -885,7 +887,7 @@ GameObject:
   - component: {fileID: 1783405888}
   - component: {fileID: 1783405887}
   m_Layer: 5
-  m_Name: Text
+  m_Name: UserNameInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1072,6 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4856cc326805b66409fe836f895e6a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tex: {fileID: 0}
 --- !u!114 &2030442554
 MonoBehaviour:
   m_ObjectHideFlags: 0

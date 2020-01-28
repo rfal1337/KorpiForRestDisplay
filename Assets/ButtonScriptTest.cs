@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ButtonScriptTest : MonoBehaviour {
 
     Button b;
-    Texture tex;
+    public Texture tex;
     GameObject cam;
 
 	// Use this for initialization
@@ -15,17 +15,31 @@ public class ButtonScriptTest : MonoBehaviour {
         b.onClick.AddListener(ButtonTest);
 	}
 	
+    //Used for 2 different buttons (not exactly a great way to do it)
     void ButtonTest()
     {
         if (gameObject.name != "PictureButton")
-            GetComponent<Networkingv2>().SendMyDataMessage();
+        {
+            try
+            {
+                string userName = GameObject.Find("UserNameInput").GetComponent<Text>().text;
+                tex = GameObject.Find("UserImage").GetComponent<RawImage>().texture;
+                Profile userProfile = new Profile(Mathf.RoundToInt(Random.Range(1, Mathf.Pow(2, 32) - 1)), userName, tex);
+            }
+            catch
+            {
+                Debug.Log("Name or Image not yet set");
+            }
+        }
         else
         {
+            //If the take a picture button is pressed, the code saves the current texture in a variable, stops the camera
+            //Then replaces the texture with the saved texture, thus taking a picture. This picture hasn't been saved anywhere
             cam = GameObject.Find("UserImage");
             tex = cam.GetComponent<RawImage>().texture;
             cam.GetComponent<DeviceCamera>().StopCamera();
             cam.GetComponent<RawImage>().texture = tex;
-            
+
         }
 
     }

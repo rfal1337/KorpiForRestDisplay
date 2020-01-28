@@ -27,7 +27,6 @@ public class Networkingv2 : MonoBehaviour
     {
         public int userID = 0;
         public string rosResults = "";
-        public Texture userImage;
         public string userName = "";
 
         public MyDataMsg() { }
@@ -37,11 +36,10 @@ public class Networkingv2 : MonoBehaviour
             this.rosResults = rosResults;
         }
 
-        public MyDataMsg(int userID, string userName, Texture userImage)
+        public MyDataMsg(string userName, int userID)
         {
             this.userID = userID;
             this.userName = userName;
-            this.userImage = userImage;
         }
     }
 
@@ -114,15 +112,17 @@ public class Networkingv2 : MonoBehaviour
 
     }
 
-    public void RegisterUser(int id, string name, Texture tex)
+    //Method on creating a user and sending it to server
+    public void RegisterUser(string name, int id)
     {
-        var msg = new MyDataMsg(id, name, tex);
+        var msg = new MyDataMsg(name, id);
         myClient.Send(MyMsgType.ID, msg);
     }
 
+    //Method on creating a instance of ROS results and sending to server
     public void SendROSResults(int id, string ros)
     {
-        var msg = new MyDataMsg(id, ros);
+        var msg = new MyDataMsg(ros, id);
         myClient.Send(MyMsgType.ID, msg);
     }
 
