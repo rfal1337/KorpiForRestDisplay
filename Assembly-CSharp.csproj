@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ButtonScriptTest.cs" />
+     <Compile Include="Assets\DeviceCamera.cs" />
      <Compile Include="Assets\Networking\Networkingv2.cs" />
      <Compile Include="Assets\StreamVideo.cs" />
  <Reference Include="UnityEngine.CoreModule">

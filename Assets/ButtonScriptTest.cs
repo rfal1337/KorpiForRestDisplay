@@ -6,19 +6,27 @@ using UnityEngine.UI;
 public class ButtonScriptTest : MonoBehaviour {
 
     Button b;
+    Texture tex;
+    GameObject cam;
+
 	// Use this for initialization
 	void Start () {
         b = GetComponent<Button>();
         b.onClick.AddListener(ButtonTest);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     void ButtonTest()
     {
-        GetComponent<Networkingv2>().SendMyDataMessage();
+        if (gameObject.name != "PictureButton")
+            GetComponent<Networkingv2>().SendMyDataMessage();
+        else
+        {
+            cam = GameObject.Find("UserImage");
+            tex = cam.GetComponent<RawImage>().texture;
+            cam.GetComponent<DeviceCamera>().StopCamera();
+            cam.GetComponent<RawImage>().texture = tex;
+            
+        }
+
     }
 }

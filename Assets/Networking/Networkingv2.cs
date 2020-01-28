@@ -9,6 +9,8 @@ public class Networkingv2 : MonoBehaviour
     NetworkClient myClient;
     public const short MyDataMsgID = 815;
 
+    public bool atStart = true;
+
     public bool isServer = false;
     public bool isClient = false;
 
@@ -23,8 +25,10 @@ public class Networkingv2 : MonoBehaviour
     //Network message data and contents
     public class MyDataMsg : MessageBase
     {
-        public int userID;
-        public string rosResults;
+        public int userID = 0;
+        public string rosResults = "";
+        public Texture userImage;
+        public string userName = "";
 
         public MyDataMsg() { }
         public MyDataMsg(int userID, string rosResults)
@@ -32,28 +36,39 @@ public class Networkingv2 : MonoBehaviour
             this.userID = userID;
             this.rosResults = rosResults;
         }
+
+        public MyDataMsg(int userID, string userName, Texture userImage)
+        {
+            this.userID = userID;
+            this.userName = userName;
+            this.userImage = userImage;
+        }
     }
 
-    void Start()
+    void Update()
     {
-        if (isServer)
+        if (atStart)
         {
-            // Now this is the SERVER
-            SetupServer();
-        }
+            if (isServer)
+            {
+                // Now this is the SERVER
+                SetupServer();
+            }
 
-        if (isClient)
-        {
-            // Now this is the CLIENT
-            SetupClient();
-        }
+            if (isClient)
+            {
+                // Now this is the CLIENT
+                SetupClient();
+            }
 
-        if (isServer && isClient)
-        {
-            // Now this is a SERVER and a Local CLIENT too
-            SetupServer();
-            SetupLocalClient();
+            if (isServer && isClient)
+            {
+                // Now this is a SERVER and a Local CLIENT too
+                SetupServer();
+                SetupLocalClient();
+            }
         }
+        Debug.Log("Connected amount: " + NetworkServer.connections.Count);
     }
 
     // Create a server and listen on a port
@@ -61,6 +76,7 @@ public class Networkingv2 : MonoBehaviour
     {
         NetworkServer.Listen(4444);
         NetworkServer.RegisterHandler(MyMsgType.ID, OnRecievingData);
+        atStart = false;
     }
 
     // Create a client and connect to the server port
@@ -68,7 +84,8 @@ public class Networkingv2 : MonoBehaviour
     {
         myClient = new NetworkClient();
         myClient.RegisterHandler(MsgType.Connect, OnConnected);
-        myClient.Connect("192.168.1.250", 4444);
+        myClient.Connect("86.50.116.69", 4444);
+        atStart = false;
     }
 
     // Create a local client and connect to the local server
@@ -76,6 +93,7 @@ public class Networkingv2 : MonoBehaviour
     {
         myClient = ClientScene.ConnectLocalServer();
         myClient.RegisterHandler(MsgType.Connect, OnConnected);
+        atStart = false;
     }
 
 
@@ -96,7 +114,19 @@ public class Networkingv2 : MonoBehaviour
 
     }
 
-    // What the SERVCER should do when getting a message
+    public void RegisterUser(int id, string name, Texture tex)
+    {
+        var msg = new MyDataMsg(id, name, tex);
+        myClient.Send(MyMsgType.ID, msg);
+    }
+
+    public void SendROSResults(int id, string ros)
+    {
+        var msg = new MyDataMsg(id, ros);
+        myClient.Send(MyMsgType.ID, msg);
+    }
+
+    // What the SERVER should do when getting a message
     public void OnRecievingData(NetworkMessage netMsg)
     {
         MyDataMsg myMsg = netMsg.ReadMessage<MyDataMsg>();
