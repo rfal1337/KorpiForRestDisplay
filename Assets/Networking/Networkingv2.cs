@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Networkingv2 : MonoBehaviour
 {
@@ -66,7 +67,6 @@ public class Networkingv2 : MonoBehaviour
                 SetupLocalClient();
             }
         }
-        Debug.Log("Connected amount: " + NetworkServer.connections.Count);
     }
 
     // Create a server and listen on a port
@@ -82,8 +82,12 @@ public class Networkingv2 : MonoBehaviour
     {
         myClient = new NetworkClient();
         myClient.RegisterHandler(MsgType.Connect, OnConnected);
-        myClient.Connect("86.50.116.69", 4444);
         atStart = false;
+    }
+
+    public void Connect(string ipAddress)
+    {
+        myClient.Connect(ipAddress, 4444);
     }
 
     // Create a local client and connect to the local server
@@ -100,6 +104,8 @@ public class Networkingv2 : MonoBehaviour
     {
         Debug.Log("Connected to server");
     }
+
+    #region Server-Client communication
 
     // Call this with the CLIENT to send a message
     public void SendMyDataMessage()
@@ -137,8 +143,24 @@ public class Networkingv2 : MonoBehaviour
         msgHolder = myMsg;
     }
 
+    #endregion
+
+
     public MyDataMsg GetData()
     {
         return msgHolder;
+    }
+
+    void OnGUI()
+    {
+        if (!myClient.isConnected)
+        {
+            GUI.TextArea(new Rect(-320, 173, 160, 35), "IP Address");
+
+            if (GUI.Button(new Rect(10,10,60,50), "Connect"))
+            {
+                Connect(GameObject.Find("IPFieldText").GetComponent<Text>().text);
+            }
+        }
     }
 }
