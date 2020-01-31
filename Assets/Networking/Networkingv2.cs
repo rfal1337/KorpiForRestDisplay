@@ -121,7 +121,9 @@ public class Networkingv2 : MonoBehaviour
     //Method on creating a user and sending it to server
     public void RegisterUser(string name, int id)
     {
-        var msg = new MyDataMsg(name, id);
+        var msg = new MyDataMsg();
+        msg.userID = id;
+        msg.userName = name;
         myClient.Send(MyMsgType.ID, msg);
     }
 
@@ -139,7 +141,7 @@ public class Networkingv2 : MonoBehaviour
 
         // use the values from the message here
         Debug.Log("userID: " + myMsg.userID);
-        Debug.Log("ROS Results: " + myMsg.rosResults);
+        Debug.Log("Username: " + myMsg.userName);
         msgHolder = myMsg;
     }
 
@@ -153,14 +155,20 @@ public class Networkingv2 : MonoBehaviour
 
     void OnGUI()
     {
-        if (!myClient.isConnected)
-        {
+        if(isServer)
             GUI.TextArea(new Rect(-320, 173, 160, 35), "IP Address");
 
-            if (GUI.Button(new Rect(10,10,60,50), "Connect"))
+        if (isClient)
+        {
+            if (!myClient.isConnected)
             {
-                Connect(GameObject.Find("IPFieldText").GetComponent<Text>().text);
+                if (GUI.Button(new Rect(20, 120, 180, 100), "Connect"))
+                {
+                    Connect(GameObject.Find("IPFieldText").GetComponent<Text>().text);
+                }
             }
         }
+
+        GUI.Box(new Rect(10, Screen.height - 50, 100, 50), Network.player.ipAddress);
     }
 }
