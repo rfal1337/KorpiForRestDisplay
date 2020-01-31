@@ -153,14 +153,23 @@ public class Networkingv2 : MonoBehaviour
 
     void OnGUI()
     {
-        if (!myClient.isConnected)
+        if (isServer)
         {
             GUI.TextArea(new Rect(-320, 173, 160, 35), "IP Address");
+            GUI.Box(new Rect(10, Screen.height - 300, 100, 50), NetworkServer.connections.Count.ToString());
+        }
 
-            if (GUI.Button(new Rect(10,10,60,50), "Connect"))
+        if (isClient)
+        {
+            if (myClient.isConnected)
             {
-                Connect(GameObject.Find("IPFieldText").GetComponent<Text>().text);
+                if (GUI.Button(new Rect(10, 10, 60, 50), "Connect"))
+                {
+                    Connect(GameObject.Find("IPFieldText").GetComponent<Text>().text);
+                }
             }
         }
+
+        GUI.Box(new Rect(10, Screen.height - 50, 100, 50), Network.player.ipAddress);
     }
 }
