@@ -28,6 +28,7 @@ public class ButtonScriptTest : MonoBehaviour {
                 Profile userProfile = new Profile(Mathf.RoundToInt(Random.Range(1, Mathf.Pow(2, 32) - 1)), userName, tex);
                 //GameObject.Find("NetworkManager").GetComponent<Networkingv2>().RegisterUser(userName, userProfile.userID);
                 GameObject.Find("NetworkManager").GetComponent<Networkingv2>().SendMyDataMessage();
+                Debug.Log("User ID: " + userProfile.userID + "\nUsername: " + userProfile.userName);
             }
             catch
             {
