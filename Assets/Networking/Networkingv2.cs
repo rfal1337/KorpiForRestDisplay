@@ -44,6 +44,11 @@ public class Networkingv2 : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     void Update()
     {
         if (atStart)

@@ -54,6 +54,7 @@
      <Compile Include="Assets\ButtonScriptTest.cs" />
      <Compile Include="Assets\Camera\DeviceCamera.cs" />
      <Compile Include="Assets\Camera\Videoplayer\StreamVideo.cs" />
+     <Compile Include="Assets\ContentAutoSize.cs" />
      <Compile Include="Assets\Networking\IpChangeButton.cs" />
      <Compile Include="Assets\Networking\Networkingv2.cs" />
      <Compile Include="Assets\Profile\Profile.cs" />
