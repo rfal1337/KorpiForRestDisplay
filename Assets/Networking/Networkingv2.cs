@@ -29,18 +29,20 @@ public class Networkingv2 : MonoBehaviour
         public int userID = 0;
         public string rosResults = "";
         public string userName = "";
+        public string messageContext;
 
         public MyDataMsg() { }
         public MyDataMsg(int userID, string rosResults)
         {
             this.userID = userID;
             this.rosResults = rosResults;
+            this.messageContext = "ROS";
         }
 
-        public MyDataMsg(string userName, int userID)
+        public MyDataMsg(int userID)
         {
             this.userID = userID;
-            this.userName = userName;
+            this.messageContext = "Register";
         }
     }
 
@@ -112,30 +114,17 @@ public class Networkingv2 : MonoBehaviour
 
     #region Server-Client communication
 
-    // Call this with the CLIENT to send a message
-    public void SendMyDataMessage()
-    {
-        var msg = new MyDataMsg();
-        msg.userID = 1337;
-        msg.rosResults = "068594";
-
-        myClient.Send(MyMsgType.ID, msg);
-
-    }
-
     //Method on creating a user and sending it to server
-    public void RegisterUser(string name, int id)
+    public void RegisterUser(int id)
     {
-        var msg = new MyDataMsg();
-        msg.userID = id;
-        msg.userName = name;
+        var msg = new MyDataMsg(id);
         myClient.Send(MyMsgType.ID, msg);
     }
 
     //Method on creating a instance of ROS results and sending to server
     public void SendROSResults(int id, string ros)
     {
-        var msg = new MyDataMsg(ros, id);
+        var msg = new MyDataMsg(id, ros);
         myClient.Send(MyMsgType.ID, msg);
     }
 
@@ -144,9 +133,16 @@ public class Networkingv2 : MonoBehaviour
     {
         MyDataMsg myMsg = netMsg.ReadMessage<MyDataMsg>();
 
-        // use the values from the message here
-        Debug.Log("userID: " + myMsg.userID);
-        Debug.Log("Username: " + myMsg.userName);
+        if(myMsg.messageContext == "ROS")
+        {
+            Debug.Log("User ID: " + myMsg.userID);
+            Debug.Log("ROS: " + myMsg.rosResults);
+        }
+        else if (myMsg.messageContext == "Register")
+        {
+            Debug.Log("User ID: " + myMsg.userID);
+        }
+
         msgHolder = myMsg;
     }
 
@@ -168,7 +164,8 @@ public class Networkingv2 : MonoBehaviour
             {
                 if (GUI.Button(new Rect(Screen.width - 130, 10, 120, 50), "Connect"))
                 {
-                    Connect(GameObject.Find("IPFieldText").GetComponent<Text>().text);
+                    GameObject g = GameObject.Find("IPFieldText");;
+                    Connect(g.GetComponent<Text>().text);
                 }
             }
         }
