@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/PC-MAIN.unity
+=======
+- path: Assets/Scenes/Main Menu.unity
+>>>>>>> 64fdf41d992e759355fcb940343d99f6c8a28059
   isLoaded: 1
   isActive: 1
