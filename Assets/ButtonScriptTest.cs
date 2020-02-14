@@ -8,6 +8,7 @@ public class ButtonScriptTest : MonoBehaviour {
     Button b;
     public Texture tex;
     GameObject cam;
+    List<Profile> profiles = new List<Profile>();
 
 	// Use this for initialization
 	void Start () {
@@ -26,8 +27,8 @@ public class ButtonScriptTest : MonoBehaviour {
                 string userName = GameObject.Find("UserNameInput").GetComponent<Text>().text;
                 tex = GameObject.Find("UserImage").GetComponent<RawImage>().texture;
                 Profile userProfile = new Profile(Mathf.RoundToInt(Random.Range(1, Mathf.Pow(2, 32) - 1)), userName, tex);
-                //GameObject.Find("NetworkManager").GetComponent<Networkingv2>().RegisterUser(userName, userProfile.userID);
-                GameObject.Find("NetworkManager").GetComponent<Networkingv2>().SendMyDataMessage();
+                profiles.Add(userProfile);
+                GameObject.Find("NetworkManager").GetComponent<Networkingv2>().RegisterUser(userProfile.userID);
                 Debug.Log("User ID: " + userProfile.userID + "\nUsername: " + userProfile.userName);
             }
             catch
