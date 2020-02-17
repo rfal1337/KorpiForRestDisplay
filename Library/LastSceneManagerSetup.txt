@@ -1,12 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/User Selection.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/PC-MAIN.unity
-=======
-- path: Assets/Scenes/Main Menu.unity
->>>>>>> 64fdf41d992e759355fcb940343d99f6c8a28059
->>>>>>> a91e71c79899799261c0e06fce133df324bdc2cf
   isLoaded: 1
   isActive: 1
