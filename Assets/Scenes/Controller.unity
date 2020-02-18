@@ -843,7 +843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mCamera: {fileID: 0}
   userImage: {fileID: 0}
-  useCamera: 0
+  useCamera: 1
 --- !u!114 &1218902909
 MonoBehaviour:
   m_ObjectHideFlags: 0
