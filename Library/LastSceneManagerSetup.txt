@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/PC-MAIN.unity
+=======
+- path: Assets/Scenes/User Selection.unity
+>>>>>>> 6f682dfc7d568e8ae48140e610f75a41c35dc2c5
   isLoaded: 1
   isActive: 1

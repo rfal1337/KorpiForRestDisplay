@@ -8,14 +8,12 @@ public class Profile {
 
     public int userID;
     public string userName;
-    public Texture userImage;
 
     //Constructor for CREATING the user
     public Profile(int userID, string userName, Texture userImage)
     {
         this.userID = userID;
         this.userName = userName;
-        this.userImage = userImage;
     }
 
     //Returns the profile of the user
