@@ -21,10 +21,10 @@ public class FillUsers : MonoBehaviour {
         WWWForm form = new WWWForm();
 
         WWW www = new WWW("http://localhost/sqlconnect/getusers.php");
-
         user = Instantiate(userObject, content.transform);
         up = user.GetComponent<UserProfile>();
         pf.SetActive(false);
         yield return www;
+        Debug.Log(www.text);
     }
 }

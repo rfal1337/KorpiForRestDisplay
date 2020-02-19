@@ -18,10 +18,10 @@ public class DatabaseHandler : MonoBehaviour {
     IEnumerator Register()
     {
         WWWForm form = new WWWForm();
-        form.AddField("name", nameField.text);
+        form.AddField("username", nameField.text);
         form.AddField("pin", pinField.text);
 
-        WWW www = new WWW("http://localhost/sqlconnect/register.php");
+        WWW www = new WWW("http://localhost/sqlconnect/register.php", form);
         yield return www;
         if(www.text == "0")
         {
@@ -36,6 +36,6 @@ public class DatabaseHandler : MonoBehaviour {
 
     public void VerifyInputs()
     {
-        submitButton.interactable = (nameField.text.Length >= 6 && pinField.text.Length == 4);
+        submitButton.interactable = (nameField.text.Length >= 3 && pinField.text.Length == 4);
     }
 }
