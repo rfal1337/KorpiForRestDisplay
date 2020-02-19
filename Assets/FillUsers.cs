@@ -25,6 +25,5 @@ public class FillUsers : MonoBehaviour {
         up = user.GetComponent<UserProfile>();
         pf.SetActive(false);
         yield return www;
-        Debug.Log(www.text);
     }
 }
