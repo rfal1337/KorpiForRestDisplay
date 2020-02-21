@@ -62,8 +62,8 @@
      <Compile Include="Assets\Networking\IpChangeButton.cs" />
      <Compile Include="Assets\Networking\Networkingv2.cs" />
      <Compile Include="Assets\Profile\Profile.cs" />
+     <Compile Include="Assets\rostest.cs" />
      <Compile Include="Assets\Scenes\MainMenu.cs" />
-     <Compile Include="Assets\UserProfile.cs" />
  <Reference Include="UnityEngine.CoreModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2017.4.35f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
  </Reference>

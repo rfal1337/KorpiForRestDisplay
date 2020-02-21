@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    public void GoToSelection()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
 
     public void GoToRegister()
     {
@@ -13,5 +17,10 @@ public class MainMenu : MonoBehaviour
     public void GoToExperience()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+    }
+
+    public void GoToRos()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
     }
 }

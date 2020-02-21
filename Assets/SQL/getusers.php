@@ -9,6 +9,16 @@
 		exit();
 	}
 
-	$getusersquery = "SELECT userid, username FROM players";
-	mysqli_query($con, $getusersquery) or die("5: user fetch failed");
+	$getusersquery = "SELECT userID, username FROM users";
+	$result = mysqli_query($con, $getusersquery) or die("5: user fetch failed");
+	$count = $result->num_rows;
+	
+	if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+				echo $row["userID"];
+				echo "|";
+				echo $row["username"];
+				echo "\t";
+            }
+         }
 ?>
