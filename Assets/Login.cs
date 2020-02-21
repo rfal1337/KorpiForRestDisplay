@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class Login : MonoBehaviour {
 
-    public InputField pinField;
     public int userID;
     Button b;
     private FillUsers fillUs;
 
     public void CallLogin()
     {
+        Debug.Log(fillUs.pinField.GetComponent<InputField>().text.Length);
         if(fillUs.pinField.GetComponent<InputField>().text.Length == 4)
             StartCoroutine(LoginPlayer());
     }
@@ -20,7 +20,7 @@ public class Login : MonoBehaviour {
     {
         WWWForm form = new WWWForm();
         form.AddField("userID", userID);
-        form.AddField("pin", pinField.text);
+        form.AddField("pin", fillUs.pinField.GetComponent<InputField>().text);
         WWW www = new WWW("http://localhost/sqlconnect/login.php", form);
         yield return www;
 
@@ -28,11 +28,10 @@ public class Login : MonoBehaviour {
         if (www.text[0] == '0')
         {
             DBManager.userID = userID;
-            DBManager.username = www.text.Split('\t')[1];
         }
         else
         {
-            pinField.text = string.Empty;
+            fillUs.pinField.GetComponent<InputField>().text = string.Empty;
         }   
 
     }
@@ -42,6 +41,7 @@ public class Login : MonoBehaviour {
         b = GetComponent<Button>();
         b.onClick.AddListener(PromptPin);
         fillUs = GameObject.Find("DatabaseManager").GetComponent<FillUsers>();
+        fillUs.pinField.GetComponent<InputField>().onValueChanged.AddListener(delegate { CallLogin(); });
     }
 
     void PromptPin()

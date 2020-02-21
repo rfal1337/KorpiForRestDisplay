@@ -43,7 +43,6 @@ public class FillUsers : MonoBehaviour
 
         foreach (var item in userDetails)
         {
-            Debug.Log(item);
             user = Instantiate(userObject, content.transform);
             user.GetComponent<Login>().userID = item.Key;
             user.GetComponentInChildren<Text>().text = item.Value;
