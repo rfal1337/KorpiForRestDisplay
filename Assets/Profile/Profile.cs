@@ -10,7 +10,7 @@ public class Profile {
     public string userName;
 
     //Constructor for CREATING the user
-    public Profile(int userID, string userName, Texture userImage)
+    public Profile(int userID, string userName)
     {
         this.userID = userID;
         this.userName = userName;

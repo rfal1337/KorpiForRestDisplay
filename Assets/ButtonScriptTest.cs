@@ -26,7 +26,7 @@ public class ButtonScriptTest : MonoBehaviour {
                 //Get user details from the opening screen, then send it to the server via network
                 string userName = GameObject.Find("UserNameInput").GetComponent<Text>().text;
                 tex = GameObject.Find("UserImage").GetComponent<RawImage>().texture;
-                Profile userProfile = new Profile(Mathf.RoundToInt(Random.Range(1, Mathf.Pow(2, 32) - 1)), userName, tex);
+                Profile userProfile = new Profile(Mathf.RoundToInt(Random.Range(1, Mathf.Pow(2, 32) - 1)), userName);
                 profiles.Add(userProfile);
                 GameObject.Find("NetworkManager").GetComponent<Networkingv2>().RegisterUser(userProfile.userID);
                 Debug.Log("User ID: " + userProfile.userID + "\nUsername: " + userProfile.userName);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class DBManager{
 
+    public static int userID;
     public static string username;
     public static string ros;
 

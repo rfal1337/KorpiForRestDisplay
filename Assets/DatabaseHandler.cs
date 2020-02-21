@@ -23,6 +23,7 @@ public class DatabaseHandler : MonoBehaviour {
 
         WWW www = new WWW("http://localhost/sqlconnect/register.php", form);
         yield return www;
+        Debug.Log(www.text);
         if(www.text == "0")
         {
             Debug.Log("User created successfully.");

@@ -16,7 +16,6 @@ public class UserProfile : MonoBehaviour {
         pinField = pf.GetComponent<InputField>();
         b = GetComponent<Button>();
         b.onClick.AddListener(PromptPin);
-        pinField.onValueChanged.AddListener(delegate { VerifyInputs(profile.userID); });
     }
 
     public void CallLogin()
@@ -37,14 +36,6 @@ public class UserProfile : MonoBehaviour {
             
         }
 
-    }
-
-    public void VerifyInputs(int userID)
-    {
-        if(pinField.text.Length == 4)
-        {
-            Debug.Log("TRUE");
-        }
     }
 
     void PromptPin()

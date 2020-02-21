@@ -58,6 +58,7 @@
      <Compile Include="Assets\DatabaseHandler.cs" />
      <Compile Include="Assets\DBManager.cs" />
      <Compile Include="Assets\FillUsers.cs" />
+     <Compile Include="Assets\Login.cs" />
      <Compile Include="Assets\Networking\IpChangeButton.cs" />
      <Compile Include="Assets\Networking\Networkingv2.cs" />
      <Compile Include="Assets\Profile\Profile.cs" />
